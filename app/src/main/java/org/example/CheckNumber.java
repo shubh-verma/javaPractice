@@ -1,7 +1,7 @@
 package org.example;
 
-public class Prime {
-    boolean isPrime(int number) {
+public class CheckNumber {
+    public static Boolean isPrime(int number) {
         int count = 0;
         for (int i = 1; i * i <= number; i++) {
             if (number % i == 0) {
@@ -13,5 +13,15 @@ public class Prime {
             }
         }
         return count == 2;
+    }
+
+    public static Boolean isPerfect(int num) {
+        int sum = 0;
+        for (int i = 1; i <= num / 2; i++) {
+            if (num % i == 0) {
+                sum = sum + i;
+            }
+        }
+        return sum == num;
     }
 }

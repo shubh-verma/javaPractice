@@ -8,8 +8,8 @@ import org.apache.commons.cli.*;
 
 public class App {
 
-    private static final Option ARG_Prime = new Option("p", "prime", false, "Check Prime Number");
-    private static final Option ARG_Perfect = new Option("x", "perfect", false, "Check Perfect Number");
+    private static final Option argPrime = new Option("p", "prime", false, "Check Prime Number");
+    private static final Option argPerfect = new Option("x", "perfect", false, "Check Perfect Number");
 
 
     public static void main(String[] args) {
@@ -17,30 +17,30 @@ public class App {
         CommandLineParser clp = new DefaultParser();
 
         Options options = new Options();
-        options.addOption(ARG_Prime);
-        options.addOption(ARG_Perfect);
+        options.addOption(argPrime);
+        options.addOption(argPerfect);
 
         try {
             CommandLine cl = clp.parse(options, args);
-//            int num = 0;
             if (cl.getArgList().isEmpty()) {
                 throw new Exception("No argument passed");
             }
+
             int num = Integer.parseInt(cl.getArgList().get(0));
-            if (cl.hasOption(ARG_Prime.getOpt())) {
-                Prime p = new Prime();
-                boolean c = p.isPrime(num);
-                System.out.println(c);
-            } else if (cl.hasOption(ARG_Perfect.getOpt())) {
-                PerfectNumber pn = new PerfectNumber();
-                boolean d = pn.isPerfect(num);
-                System.out.println(d);
+
+            String result = "";
+
+            if (cl.hasOption(argPrime.getOpt())) {
+                result = CheckNumber.isPrime(num).toString();
+            } else if (cl.hasOption(argPerfect.getOpt())) {
+                result = CheckNumber.isPerfect(num).toString();
             } else {
-                System.out.println("Please press p or x to continue");
+                result = "Please press p or x to continue";
             }
+
+            System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
