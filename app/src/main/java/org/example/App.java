@@ -8,8 +8,8 @@ import org.apache.commons.cli.*;
 
 public class App {
 
-    private static final Option ARG_Prime = new Option("p", "prime", false,"Check Prime Number");
-    private static final Option ARG_Perfect = new Option("x", "perfect", false,"Check Perfect Number");
+    private static final Option ARG_Prime = new Option("p", "prime", false, "Check Prime Number");
+    private static final Option ARG_Perfect = new Option("x", "perfect", false, "Check Perfect Number");
 
 
     public static void main(String[] args) {
@@ -22,13 +22,12 @@ public class App {
 
         try {
             CommandLine cl = clp.parse(options, args);
-            int num = 0;
-            try{
-                num = Integer.parseInt(cl.getArgList().get(0));
-            }catch (Exception e){
-                e.printStackTrace();
+//            int num = 0;
+            if (cl.getArgList().isEmpty()) {
+                throw new Exception("No argument passed");
             }
-            if(cl.hasOption(ARG_Prime.getOpt())){
+            int num = Integer.parseInt(cl.getArgList().get(0));
+            if (cl.hasOption(ARG_Prime.getOpt())) {
                 Prime p = new Prime();
                 boolean c = p.isPrime(num);
                 System.out.println(c);
@@ -36,10 +35,10 @@ public class App {
                 PerfectNumber pn = new PerfectNumber();
                 boolean d = pn.isPerfect(num);
                 System.out.println(d);
-            }else{
+            } else {
                 System.out.println("Please press p or x to continue");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
